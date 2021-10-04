@@ -14,6 +14,43 @@
 
           Upon submitting the form, simply print the value to the console
       -->
+         <form [formGroup]="projectForm" (ngSubmit)="onSubmit()">
+            <div class="form-group">
+               <label for="name">Project Name</label>
+               <input type="text" class="form-control" formControlName="name">
+               <em class="error-msg" *ngIf="!projectForm.get('name').valid && projectForm.get('name').touched">
+                  <span *ngIf="projectForm.get('name').errors && projectForm.get('name').errors['required']">
+                     Project name is required
+                  </span>
+                  <span *ngIf="projectForm.get('name').errors && projectForm.get('name').errors['nameIsForbidden']">
+                     Project name should not be 'Test'
+                  </span>
+               </em>
+            </div>
+            <div class="form-group">
+               <label for="name">Email</label>
+               <input type="text" class="form-control" formControlName="email">
+               <em class="error-msg" *ngIf="!projectForm.get('email').valid && projectForm.get('email').touched">
+                  <span *ngIf="projectForm.get('email').errors['required']">
+                     Email is required
+                  </span>
+                  <span *ngIf="projectForm.get('email').errors['email']">
+                     Email must be a valid email
+                  </span>
+               </em>
+            </div>
+            <div class="form-group">
+               <label for="name">Project Status</label>
+               <select class="form-control" formControlName="status">
+                  <option value="stable">Stable</option>
+                  <option value="critical">Critical</option>
+                  <option value="finished">Finished</option>
+               </select>
+               <em class="error-msg"
+                  *ngIf="!projectForm.get('status').valid && projectForm.get('status').touched">Status is required</em>
+            </div>
+            <button class="btn btn-primary" type="submit">Submit</button>
+         </form>
       </div>
    </div>
 </div>
